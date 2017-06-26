@@ -45,7 +45,7 @@ echo -e "--- pm2 logs starts ---"
 echo "${stdout}"
 echo -e "--- pm2 logs ends ---\n\n"
 
-if [[ "${stdout}" == *"still alive after"* ]]; then
+if [[ "${stdout}" == *"Node.js process not exited, set exit code to 1"* ]]; then
   echo "Test fail"
 
   echo "Error: SIGINT did not stop server, pm2 sent SIGKILL signals after waiting 1600ms"
