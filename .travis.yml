@@ -14,7 +14,7 @@ node_js:
   - "node"
 
 before_install:
-  - yarn add -g pm2
+  - yarn global add pm2
 
 after_script:
   - pm2 logs all --nostream --lines 10000
