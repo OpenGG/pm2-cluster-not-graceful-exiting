@@ -4,6 +4,8 @@ var createServer = require('http').createServer;
 
 var port = parseInt(process.argv[2], 10) || 9293;
 
+var dirtyFix = process.argv[3] === '--dirty-fix';
+
 console.log('Creating server');
 
 var server = createServer(function (req, res) {
@@ -21,7 +23,17 @@ process.on('SIGINT', function () {
   // So I can clean some stuff before the final stop
   console.log('Receiving SIGINT, closing server');
 
-  server.close();
+  server.close(function () {
+    if (dirtyFix) {
+      var handles = process._getActiveHandles();
+      // var requests = process._getActiveRequests();
+
+      handles.forEach(function (handle) {
+        handle.close();
+        //console.log('handle', getAllProps(handle));
+      });
+    }
+  });
 
   setTimeout(function () {
     // 300ms later the process kill it self to allow a restart

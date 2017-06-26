@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "description": "Showcase where pm2 cluster not graceful exiting",
   "scripts": {
-    "test": "./test.sh && ./test-pm2.sh"
+    "test:without-pm2": "echo '------ test without pm2 starts ------' && ./test.sh && echo '------ test without pm2 ends ------\n\n\n'",
+    "test:pm2": "echo '------ test with pm2 starts ------' && ./test-pm2.sh && echo '------ test with pm2 ends ------\n\n\n'",
+    "test:pm2-dirty-fix": "echo '------ test with pm2 dirty-fix starts ------' && ./test-pm2.sh --dirty-fix && echo '------ test with pm2 dirty-fix ends ------\n\n\n'",
+    "test": "npm run test:without-pm2 && npm run test:pm2-dirty-fix && npm run test:pm2"
   },
   "repository": {
     "type": "git",
