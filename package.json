@@ -1,0 +1,18 @@
+{
+  "name": "pm2-cluster-not-graceful-exiting",
+  "version": "1.0.0",
+  "description": "Showcase where pm2 cluster not graceful exiting",
+  "scripts": {
+    "test": "./test.sh && ./test-pm2.sh"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OpenGG/pm2-cluster-not-graceful-exiting.git"
+  },
+  "author": "OpenGG <liy099@gmail.com>",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/OpenGG/pm2-cluster-not-graceful-exiting/issues"
+  },
+  "homepage": "https://github.com/OpenGG/pm2-cluster-not-graceful-exiting#readme"
+}
