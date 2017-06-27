@@ -1,5 +1,17 @@
 'use strict';
 
+var PM2_DISCONNECT = function PM2_DISCONNECT() {
+  if (process.connected) {
+    process.removeAllListeners('uncaughtException');
+    process.removeAllListeners('unhandledRejection');
+    process.disconnect();
+    delete process.stdout.write;
+    delete process.stderr.write;
+  } else {
+    throw new Error('Already disconnected');
+  }
+};
+
 var createServer = require('http').createServer;
 
 var port = parseInt(process.argv[2], 10) || 9293;
@@ -25,14 +37,11 @@ process.on('SIGINT', function () {
 
   server.close(function () {
     if (dirtyFix) {
-      var handles = process._getActiveHandles();
-      // var requests = process._getActiveRequests();
-
-      handles.forEach(function (handle) {
-        handle.close();
-        //console.log('handle', getAllProps(handle));
-      });
+      PM2_DISCONNECT();
     }
+
+    process.stdout.write('[' + process.pid + ']Write to stdout: 1234567890');
+    process.stderr.write('[' + process.pid + ']Write to stderr: baaaaaaaaaab');
   });
 
   setTimeout(function () {
