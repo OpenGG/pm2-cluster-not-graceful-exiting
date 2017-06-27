@@ -43,7 +43,7 @@ fi
 
 echo "Graceful stopping server with pm2 gracefulReload"
 
-pm2 gracefulReload "${config}"
+pm2 reload "${config}"
 
 stdout=$(pm2 logs all --nostream --lines 10000)
 
